@@ -1,0 +1,10 @@
+v 1
+d 'DYADCLUST'
+d 
+d Distribution-Date: 23mar2021
+d License: MIT
+d 
+F dyadclust.ado
+F dyadclust.sthlp
+F vcimatrix.ado
+F vcimatrix_parallel.ado
