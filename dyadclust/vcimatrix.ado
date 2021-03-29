@@ -1,4 +1,3 @@
-cap prog drop vcimatrix
 prog def vcimatrix, eclass
 	syntax [anything], id1(varname) id2(varname) [weightss(varname) parallel]
 	gettoken subcmd 0 : 0
