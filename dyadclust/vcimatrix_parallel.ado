@@ -17,6 +17,7 @@ prog def vcimatrix_parallel, eclass
 				global uniqued_`cch'="`uniqued_`cch''"
 			}
 		}
+		macro drop unique
 		* Loading the dataset
 		u bridge, clear
 		forvalues cch=1/$PLL_CHILDREN {
