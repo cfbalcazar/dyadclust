@@ -54,7 +54,7 @@ prog def dyadclust, eclass
 	else {
 		cap vcimatrix_parallel
 		save bridge, replace
-		parallel numprocessors
+		cap parallel numprocessors
 		if _rc!=0 {
 			di "{error: PARALLEL is not installed. Install it from here: }"
 			di `"{browse "https://github.com/gvegayon/parallel": Parallel package.}"' 
