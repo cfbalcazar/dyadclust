@@ -56,7 +56,7 @@ prog def dyadclust, eclass
 		save bridge, replace
 		parallel numprocessors
 		if _rc!=0 {
-			di "{error: PARALLEL is not installed. Install it from here: `"
+			di "{error: PARALLEL is not installed. Install it from here: }"
 			di `"{browse "https://github.com/gvegayon/parallel": Parallel package.}"' 
 			exit 198
 		}
