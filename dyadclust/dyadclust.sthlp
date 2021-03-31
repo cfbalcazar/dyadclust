@@ -22,7 +22,8 @@
 	
 {syntab:Optional}
 {synopt :{opt weights(varname)}} runs the regression using the specified analytic weights.{p_end}
-{synopt :{opt par:allel}} parallel computing implementation. This option works better with a large number of dyads and CPUs. {p_end}
+{synopt :{opt par:allel}} parallel computing implementation. This option works better with a large number of dyads and CPUs. To use this option, the
+{browse "https://github.com/gvegayon/parallel": parallale package} needs to be installed. {p_end}
 
 {marker description}{...}
 {title:Description}
