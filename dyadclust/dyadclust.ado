@@ -1,5 +1,6 @@
+cap prog drop dyadclust
 prog def dyadclust, eclass
-	syntax [anything], EGOid(varname) ALTERid(varname) [weights(varname) PARallel]
+	syntax [anything], EGOid(varname) ALTERid(varname) [weights(varname) absorb(varlist) PARallel]
 	* Obtain regresison equation
 	gettoken subcmd 0 : 0
 	gettoken equation 0 : 0, parse(",")
@@ -84,11 +85,26 @@ prog def dyadclust, eclass
 		erase uids.dta
 	}
 	* Obtaining V_D
-	qui: `equation' [aw=`weights'], cluster(`_id3')
+	if "`absorb'"=="" {
+		qui: `equation' [aw=`weights'], cluster(`_id3')
+	}
+	else {
+		tokenize `equation'
+		local equation= subinstr("`equation'","`1'","reghdfe",1)
+		qui: `equation' [aw=`weights'], cluster(`_id3') absorb(`absorb')
+	}
+	
 	matrix `V_D' = e(V)
 	
 	* Obtaining V_0
-	qui: `equation' [aw=`weights'], r
+	if "`absorb'"=="" {
+		qui: `equation' [aw=`weights'], r
+	}
+	else {
+		tokenize `equation'
+		local equation= subinstr("`equation'","`1'","reghdfe",1)
+		qui: `equation' [aw=`weights'], vce(robust) absorb(`absorb')
+	}
 	matrix `V_0' = e(V)
 	
 	* Reposting the variance-covariance matrix
@@ -96,5 +112,10 @@ prog def dyadclust, eclass
 	matrix drop V_C
 	ereturn repost V = `V_dyad'
 	ereturn scalar df_r = .
-	regress
+	if "`absorb'"=="" {
+		regress
+	}
+	else{
+		reghdfe
+	}
 end
