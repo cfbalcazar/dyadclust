@@ -80,6 +80,8 @@ Email: {browse "mailto:cfbalcazar@nyu.edu ":cfbalcazar@nyu.edu }
 {marker updates}{...}
 {title:Updates}
 
+{phang2}For updating the package please use: {p_end}
+
 {phang2}{cmd: net install dyadclust, from (https://raw.githubusercontent.com/cfbalcazar/dyadclust/main/dyadclust/) replace force all}
 
 {marker references}{...}
