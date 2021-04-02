@@ -37,12 +37,12 @@
 {marker postestimation}{...}
 {title:Postestimation Syntax}
 
-Exactly the same as in {help regress}.
+Exactly the same as in {help regress}. If the {cmd: absorb} option is used, posestimation follows the rules of {help reghdfe}.
 
-{marker postestimation}{...}
+{marker Stored}{...}
 {title:Stored results}
 
-Exactly the same as in {help regress}.
+Exactly the same as in {help regress}. If the {cmd: absorb} option is used, the stored results follow the rules of {help reghdfe}.
 
 {hline}
 {marker examples}{...}
@@ -62,6 +62,7 @@ Exactly the same as in {help regress}.
 {phang2}{cmd: dyadclust: reg dY dX, ego(dyad1) alter(dyad2) par }{p_end}
 
 {pstd} Example using absorb and parallelization: {p_end}
+
 {phang2}{cmd: gen randn=runiform()}  {p_end}
 {phang2}{cmd: egen fe = cut(randn), group(5)}  {p_end}
 {phang2}{cmd: dyadclust: reg dY dX, ego(dyad1) alter(dyad2) absorb(fe) par }{p_end}
