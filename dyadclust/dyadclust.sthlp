@@ -81,8 +81,6 @@ Email: {browse "mailto:cfbalcazar@nyu.edu ":cfbalcazar@nyu.edu }
 
 {phang2}{cmd: net install dyadclust, from (https://raw.githubusercontent.com/cfbalcazar/dyadclust/main/dyadclust/) replace force all}
 
-{phang2}{cmd: dyadclust: reg dY dX, ego(dyad1) alter(dyad2) par }{p_end}
-
 {marker references}{...}
 {title:References}
 
