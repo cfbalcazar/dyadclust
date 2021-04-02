@@ -39,7 +39,7 @@
 
 Exactly the same as in {help regress}. If the {cmd: absorb} option is used, posestimation follows the rules of {help reghdfe}.
 
-{marker Stored results}{...}
+{marker Stored}{...}
 {title:Stored results}
 
 Exactly the same as in {help regress}. If the {cmd: absorb} option is used, the stored results follow the rules of {help reghdfe}.
