@@ -25,7 +25,7 @@
 {synopt :{opt absorb(varlist)}} categorical variables that identify the fixed effects to be absorbed. This option implements {browse "https://github.com/sergiocorreia/reghdfe": reghdfe}. 
 	(Caution: the user should not use reghdfe instead of {cmd:{ul:reg}ress} after {cmd:dyadclust:}). {p_end}
 {synopt :{opt par:allel}} parallel computing implementation. This option works better with a large number of dyads and CPUs. To use this option, the
-{browse "https://github.com/gvegayon/parallel": parallale package} needs to be installed. {p_end}
+{browse "https://github.com/gvegayon/parallel": parallel package} needs to be installed. {p_end}
 
 {marker description}{...}
 {title:Description}
@@ -66,7 +66,6 @@ Exactly the same as in {help regress}. If the {cmd: absorb} option is used, the 
 {phang2}{cmd: gen randn=runiform()}  {p_end}
 {phang2}{cmd: egen fe = cut(randn), group(5)}  {p_end}
 {phang2}{cmd: dyadclust: reg dY dX, ego(dyad1) alter(dyad2) absorb(fe) par }{p_end}
-{hline}
 {hline}
 
 {marker contact}{...}
