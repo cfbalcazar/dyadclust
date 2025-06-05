@@ -1,6 +1,6 @@
 cap prog drop vcimatrix_parallel
 prog def vcimatrix_parallel, eclass
-	syntax [anything], id1(string) id2(string) [weightss(string) absorbs(string) parallel]
+	syntax [anything], lats(string) lons(string) [weightss(string) absorbs(string) groups(string) parallel]
 	gettoken subcmd 0 : 0
 	gettoken formula 0 : 0, parse(",")
 	qui {
@@ -21,23 +21,50 @@ prog def vcimatrix_parallel, eclass
 		macro drop unique
 		* Loading the dataset
 		u bridge, clear
+		qui: tempvar _lat_scale
+		qui: tempvar _lon_scale
+		gen `_lat_scale'=cos(`lats'*3.1416/180)*111
+		gen `_lon_scale'=111
 		forvalues cch=1/$PLL_CHILDREN {
 			cap mat drop V_C_`cch'
 			* Executing parallel instance
 			if ($pll_instance == `cch') { 
+				levelsof `groups', l(_times)
+				foreach _t of local _times {
 				qui foreach ids of global uniqued_`cch' {
 					tempvar i_cl
-					gen `i_cl'=-99 if `id1'=="`ids'"
-					replace `i_cl'=-99 if `id2'=="`ids'"
+					
+					scalar _lon_scale = cos(lat1[i,1]*pi()/180)*111 if 
+					lat_scale = 111
+							
+					window_i = distance_i :<= dist_cutoff
+
+					//----------------------------------------------------------------
+					// adjustment for the weights if a "bartlett" kernal is selected as an option
+			
+					if ("`bartlett'"=="bartlett"){
+					
+						// this weights observations as a linear function of distance
+						// that is zero at the cutoff distance
+						
+						weight_i = 1:- distance_i:/dist_cutoff
+
+						window_i = window_i:*weight_i
+					}
+
+
+					gen `i_cl'=-99 if `lats'=="`ids'"
+					replace `i_cl'=-99 if `lons'=="`ids'"
 					replace `i_cl'=_n if `i_cl'==.
 					tostring `i_cl', replace
+
 					if "`absorbs'"=="" {
 						qui: `formula' [aw=`weightss'], cluster(`i_cl')
 					}
 					else {
 						tokenize `formula'
 						local formula= subinstr("`formula'","`1'","reghdfe",1)
-						qui: `formula' [aw=`weights'], r absorb(`absorb')
+						qui: `formula' [aw=`weights'], r absorb(`absorbs')
 					}
 					* Updating the V_C matrix
 					cap matrix V_C_`cch'=V_C_`cch'+e(V)
