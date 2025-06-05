@@ -50,7 +50,7 @@ prog def dyadclust, eclass
 
 	* Obtaining the V_Ci 
 	if "`parallel'"=="" {
-		vcimatrix: `equation', id1(`_id1') id2(`_id2') absorbs(`absorb') weightss(`weights')
+		vcimatrix: `equation', id1(`_id1') id2(`_id2') weightss(`weights')
 	}
 	else {
 		cap vcimatrix_parallel
@@ -62,7 +62,7 @@ prog def dyadclust, eclass
 			exit 198
 		}
 		parallel initialize `=`r(numprocessors)'-1', f	
-		parallel, nodata prog(vcimatrix_parallel): vcimatrix_parallel: `equation', id1("`_id1'") id2("`_id2'") absorbs("`absorb'") weightss("`weights'") parallel
+		parallel, nodata prog(vcimatrix_parallel): vcimatrix_parallel: `equation', id1("`_id1'") id2("`_id2'") weightss("`weights'") parallel
 		qui {
 			clear
 			local files : dir "`c(pwd)'" files "*V_C.dta"

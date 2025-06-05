@@ -16,7 +16,7 @@ prog def vcimatrix, eclass
 		else {
 			tokenize `formula'
 			local formula= subinstr("`formula'","`1'","reghdfe",1)
-			qui: `formula' [aw=`weights'], r absorb(`absorbs')
+			qui: `formula' [aw=`weights'], r absorb(`absorb')
 		}
 		* Updating the V_C matrix
 		cap matrix V_C=V_C+e(V)
