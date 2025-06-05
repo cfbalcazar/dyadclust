@@ -37,7 +37,7 @@ prog def vcimatrix_parallel, eclass
 					else {
 						tokenize `formula'
 						local formula= subinstr("`formula'","`1'","reghdfe",1)
-						qui: `formula' [aw=`weights'], r absorb(`absorb')
+						qui: `formula' [aw=`weights'], r absorb(`absorbs')
 					}
 					* Updating the V_C matrix
 					cap matrix V_C_`cch'=V_C_`cch'+e(V)
